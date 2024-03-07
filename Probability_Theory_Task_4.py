@@ -5,3 +5,26 @@
 что все мячи белые? Какова вероятность того, что ровно два мяча белые? Какова вероятность того, ч
 то хотя бы один мяч белый?
 """
+from math import comb
+
+# Вероятности для первого ящика
+P1_all_white = comb(7, 2) / comb(10, 2)
+P1_no_white = comb(3, 2) / comb(10, 2)
+
+# Вероятности для второго ящика
+P2_all_white = comb(9, 2) / comb(11, 2)
+P2_no_white = comb(2, 2) / comb(11, 2)
+
+# Вероятность, что все мячи белые
+P_all_white = P1_all_white * P2_all_white
+
+# Вероятность, что ровно два мяча белые
+P_exactly_two_white = (P1_all_white * P2_no_white) + (P1_no_white * P2_all_white) + \
+                      (comb(7, 1) * comb(3, 1) / comb(10, 2)) * (comb(9, 1) * comb(2, 1) / comb(11, 2))
+
+# Вероятность, что хотя бы один мяч белый
+P_at_least_one_white = 1 - (P1_no_white * P2_no_white)
+
+print(f"Вероятность, что все мячи белые: {P_all_white}")
+print(f"Вероятность, что ровно два мяча белые: {P_exactly_two_white}")
+print(f"Вероятность, что хотя бы один мяч белый: {P_at_least_one_white}")
